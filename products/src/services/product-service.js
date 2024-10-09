@@ -19,6 +19,13 @@ class ProductService {
     return FormateData(productResult);
   }
 
+  async RemoveProductByName(name) {
+    if (name == "" || productInputs.name == undefined) {
+      throw new Error("product name should not be empty");
+    }
+    return await this.repository.RemoveProductByName(name);
+  }
+
   async GetProducts() {
     const products = await this.repository.Products();
 
