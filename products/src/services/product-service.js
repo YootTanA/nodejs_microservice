@@ -27,9 +27,10 @@ class ProductService {
     const products = await this.repository.Products();
 
     let totalPrice = 0;
-    for (var product in products) {
+    products.forEach((product) => {
       totalPrice += product.price;
-    }
+    });
+
     return totalPrice;
   }
 
