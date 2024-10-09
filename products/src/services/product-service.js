@@ -3,8 +3,8 @@ const { FormateData } = require("../utils");
 
 // All Business logic will be here
 class ProductService {
-  constructor() {
-    this.repository = new ProductRepository();
+  constructor(productRepository) {
+    this.repository = productRepository;
   }
 
   async CreateProduct(productInputs) {
