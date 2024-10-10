@@ -4,6 +4,9 @@ const { ProductRepository } = require("../database");
 describe("ProductService", () => {
   describe("CreateProduct", () => {
     class mockProductRepository extends ProductRepository {
+      constructor() {
+        super();
+      }
       async CreateProduct({
         name,
         desc,
@@ -17,22 +20,38 @@ describe("ProductService", () => {
         return {};
       }
     }
-    const productService = new ProductService(mockProductRepository);
-    const productInput = {
-      name: "",
-      desc: "",
-      type: "",
-      unit: "",
-      price: "",
-      available: "",
-      suplier: "",
-      banner: "",
-    };
 
     test("giving empty product name go as expected", () => {
+      const mockRepo = new mockProductRepository();
+      const productService = new ProductService(mockRepo);
+      const productInput = {
+        name: "",
+        desc: "",
+        type: "",
+        unit: "",
+        price: "",
+        available: "",
+        suplier: "",
+        banner: "",
+      };
+
       expect(productService.CreateProduct(productInput)).rejects.toThrow();
     });
 
-    test("giving non empty product inputs go as expected", async () => {});
+    test("giving non empty product inputs go as expected", async () => {
+      const mockRepo = new mockProductRepository();
+      const productService = new ProductService(mockRepo);
+      const productInput = {
+        name: "mock",
+        desc: "",
+        type: "",
+        unit: "",
+        price: "",
+        available: "",
+        suplier: "",
+        banner: "",
+      };
+      expect(productService.CreateProduct(productInput)).not.toBeNull();
+    });
   });
 });
