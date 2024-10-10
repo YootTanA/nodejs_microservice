@@ -14,7 +14,7 @@ class ProductService {
     if (productInputs.name == "" || productInputs.name == undefined) {
       throw new Error("product name should not be empty");
     }
-    if (isNaN(productInputs) || productInputs.price == undefined) {
+    if (isNaN(productInputs.price) || productInputs.price == undefined) {
       throw new Error("product price should be a number");
     }
 
