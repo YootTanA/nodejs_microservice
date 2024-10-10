@@ -14,9 +14,24 @@ class ProductService {
     if (productInputs.name == "" || productInputs.name == undefined) {
       throw new Error("product name should not be empty");
     }
+    if (isNaN(productInputs) || productInputs.price == undefined) {
+      throw new Error("product price should be a number");
+    }
 
     const productResult = await this.repository.CreateProduct(productInputs);
     return FormateData(productResult);
+  }
+
+  // This function provides a total price of all products in database
+  async GetTotalProductPrice() {
+    const products = await this.repository.Products();
+
+    let totalPrice = 0;
+    products.forEach((product) => {
+      totalPrice += product.price;
+    });
+
+    return totalPrice;
   }
 
   async GetProducts() {
